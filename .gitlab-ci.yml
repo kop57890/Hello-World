@@ -1,9 +1,9 @@
 variables:
   EXE_RELEASE_FOLDER: 'AddFunction\bin\Debug'
-  TEST: 'FunctionTest\bin\Debug\netcoreapp2.2\FunctionTest.dll'
+  TEST: 'FunctionTest\FunctionTest.csproj'
   DEPLOY_FOLDER: 'C:\Release_bin'
   MSBUILD: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe'
-  VSTEST: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
+  # VSTEST: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
   ARGV: '/p:Configuration=Debug'
 
 stages:
@@ -33,8 +33,8 @@ test_job:
     - windows
   script:
     - '$env:TEST'
-    - '$env:VSTEST'
-    - '& $env:VSTEST $env:TEST'  # running VSTest
+    # - '$env:VSTEST'
+    - 'dotnet test $env:TEST'  # running VSTest
   only:
     - dev
 
