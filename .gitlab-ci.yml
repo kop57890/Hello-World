@@ -1,4 +1,5 @@
 variables:
+  SLN_FILE: 'AddFunction.sln'
   EXE_RELEASE_FOLDER: 'AddFunction\bin\Debug'
   TEST_FOLDER: 'FunctionTest\bin\Debug\netcoreapp2.2'
   DEPLOY_FOLDER: 'C:\Release_bin'
@@ -16,7 +17,7 @@ build_job:
     - windows
   script:
     - 'nuget restore'
-    - '& "$env:MSBUILD_PATH" /p:Configuration=Debug'  # build the project
+    - 'msbuild $env:SLN_FILE'  # build the project
   artifacts:
     expire_in: 1 week  # save gitlab server space, we copy the files we need to deploy folder later on
     paths:
@@ -29,7 +30,7 @@ test_job:
   tags:
     - windows
   script:
-    - '& "$env:VSTEST_PATH" "$env:TEST_FOLDER\FunctionTest.dll"'  # running VSTest
+    - 'vstest.console $env:TEST_FOLDER\FunctionTest.dll'  # running VSTest
   only:
     - dev
 
