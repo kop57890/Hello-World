@@ -18,7 +18,7 @@ build_job:
   script:
     # - 'nuget restore'
     # - 'dotnet restore'
-    - 'msbuild /t:restore $env:SLN_FILE'  # build the project
+    - 'msbuild /t:restore $env:SLN_FILE /property:Configuration=Debug'  # build the project
   artifacts:
     expire_in: 1 week  # save gitlab server space, we copy the files we need to deploy folder later on
     paths:
