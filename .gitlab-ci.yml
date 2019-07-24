@@ -16,7 +16,7 @@ build_job:
   tags:
     - windows
   script:
-    - 'nuget restore'
+    # - 'nuget restore'
     - 'dotnet restore'
     - 'msbuild $env:SLN_FILE'  # build the project
   artifacts:
