@@ -1,6 +1,6 @@
 variables:
   EXE_RELEASE_FOLDER: 'AddFunction\bin\Debug'
-  TEST_FOLDER: 'FunctionTest\bin\Debug\netcoreapp2.2'
+  TEST: 'FunctionTest\bin\Debug\netcoreapp2.2\FunctionTest.dll'
   DEPLOY_FOLDER: 'C:\Release_bin'
   MSBUILD: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe'
   VSTEST: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
@@ -32,7 +32,9 @@ test_job:
   tags:
     - windows
   script:
-    - 'Invoke-Expression "$env:VSTEST $env:TEST_FOLDER\FunctionTest.dll"'  # running VSTest
+    - '$env:TEST'
+    - '$env:VSTEST'
+    - '& $env:VSTEST $env:TEST'  # running VSTest
   only:
     - dev
 
